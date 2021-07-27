@@ -1,0 +1,50 @@
+<div
+  *ngIf="this.meService.me"
+  class="card mb-3">
+  <div class="card-body text-center shadow">
+    <img *ngIf="!imgTemp" class="rounded-circle mb-3 mt-4" [src]="this.meService.me.img | newImage: 'users'" width="160" height="160">
+    <img *ngIf="imgTemp" class="rounded-circle mb-3 mt-4" [src]="this.imgTemp" width="160" height="160">
+
+
+    <div *ngIf="!changeImage" class="mb-3">
+      <button
+        class="btn btn-outline-primary btn-sm"
+        type="button"
+        (click)="EnableChangeImage()"
+      >Cambiar foto de Perfil</button>
+    </div>
+
+    <div *ngIf="changeImage && !imagenSubir" class="mb-3 custom-file">
+      <label class="custom-file-label" for="inputFile">Seleccionar Imagen</label>
+      <input  id="inputFile" class="custom-file-input" type="file" (change)="cambiarImagen($event.target.files[0])">
+    </div>
+
+
+    <div class="mb-3" *ngIf="changeImage">
+      <div class="row">
+
+        <div *ngIf="imagenSubir" class="col">
+          <button
+            class="btn btn-primary btn-sm btn-block"
+            type="button"
+            (click)="subirImagen()">
+            <i class="fa" [ngClass]="{'fa-spin fa-sync': saving, 'fa-save': !saving}"></i>
+            Guardar foto
+          </button>
+        </div>
+
+        <div class="col">
+          <button
+            class="btn btn-secondary btn-sm btn-block"
+            type="button"
+            (click)="cancelUploadImg()">
+            <i class="fa fa-ban"></i>
+            Cancelar
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

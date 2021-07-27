@@ -1,0 +1,160 @@
+<div class="card shadow">
+  <div class="card-header py-3">
+    <p class="text-primary m-0 font-weight-bold">Te siguen</p>
+  </div>
+  <div class="card-body">
+    <div class="row">
+
+      <div class="col-md-6 text-nowrap">
+        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+          <label>Mostrar&nbsp;
+            <select
+              [(ngModel)]="pageSize"
+              class="form-control form-control-sm custom-select custom-select-sm"
+              (change)="changePageSize()"
+            >
+              <option *ngFor="let size of this.pageSizes" [value]="size" selected="">{{ size }}</option>
+            </select>&nbsp;
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Tabla de resultados -->
+    <div class="table-responsive table mt-2"  role="grid" aria-describedby="dataTable_info">
+      <table class="table my-0" id="dataTable">
+
+        <thead>
+        <tr class="d-flex">
+          <th class="col-4">Nombre</th>
+          <th class="col-3">Siguiendo</th>
+          <th class="col-3" >Te sigue</th>
+          <th class="col-2"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of this.followers; index as i"
+            class="d-flex"
+        >
+          <td class="col-4">
+            <img class="rounded-circle mr-2"
+                 width="40"
+                 height="40"
+                 [alt]="user.follower.nombre +' '+user.follower.apellido"
+                 [src]="user.follower.img | newImage : 'users'"
+            >
+            {{user.follower.nombre | titlecase }} {{user.follower.apellido | titlecase}}
+          </td>
+
+          <!-- Seguido por -->
+          <td class="col-3">
+            <div class="row">
+              <div class="col">
+                <div *ngIf="user.isConfirmed">
+                  <span *ngIf="user.isConfirmed.value" class="badge badge-pill badge-success mr-1">Te sigue</span>
+                  <span *ngIf="!user.isConfirmed.value" class="badge badge-pill badge-secondary mr-1">Solicitó seguirte</span>
+                </div>
+
+                <div *ngIf="user.isConfirmed">
+                  <div *ngIf="!user.isConfirmed.value" class="btn btn-outline-success btn-sm mr-1" (click)="confirmFollower( user, i )">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="btn btn-outline-danger btn-sm mr-1" (click)="deleteFollower(user, i)">
+                    <i class="far fa-trash-alt"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </td>
+
+          <!-- Fin Seguido por -->
+
+          <!-- Siguiendo-->
+
+          <td class="col-3">
+
+            <div class="row">
+              <div class="col">
+                <div  *ngIf="user.following">
+                  <span *ngIf="user.following.isConfirmed.value" class="badge badge-pill badge-success mr-1">Siguiendo</span>
+                  <span *ngIf="!user.following.isConfirmed.value" class="badge badge-pill badge-secondary mr-1">Solicitud Enviada</span>
+                </div>
+                <div *ngIf="!user.following" class="btn btn-outline-dark btn-sm mr-1" (click)="followUser( user, i )">
+                  <i class="fas fa-plus"></i>
+                </div>
+                <div *ngIf="user.following" class="btn btn-outline-danger btn-sm mr-1" (click)="unFollowUser(user, i)">
+                  <i class="far fa-trash-alt"></i>
+                </div>
+              </div>
+            </div>
+          </td>
+
+          <!-- Fin Siguiendo-->
+
+          <!-- Acciones -->
+          <td class="col-1">
+            <div class="row">
+
+              <div class="col">
+                <div class="btn btn-outline-success"
+                     data-bs-toggle="tooltip"
+                     data-bs-placement="top"
+                     title="Ver Detalle"
+                     (click)="showUser(user.follower._id)"
+                >
+                  <i class="far fa-eye"></i>
+                </div>
+              </div>
+            </div>
+          </td>
+          <!-- Fin Acciones -->
+
+
+        </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+    <!-- Fin Tabla de resultados -->
+
+
+    <div *ngIf="pagination" class="row">
+      <div class="col-md-6 align-self-center">
+        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+          Mostrando {{pagination.showing.from}} a {{pagination.showing.to}} de {{pagination.showing.of}}
+        </p>
+      </div>
+      <div class="col-md-6">
+        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+          <ul class="pagination">
+
+            <li class="page-item" [ngClass]="{'disabled': !pagination.previousPage }">
+              <button class="page-link" type="button" (click)="goToPage(this.pagination.previousPage)" aria-label="Previous">
+                <span aria-hidden="true">«</span>
+              </button>
+            </li>
+
+            <li *ngFor="let page of this.pagination.pages" class="page-item" [ngClass]="{'active': this.pagination.currentPage === page}">
+              <button type="button" class="page-link" (click)="goToPage(page)">
+                {{page}}
+              </button>
+            </li>
+
+            <li class="page-item" [ngClass]="{'disabled': !pagination.nextPage }">
+              <button type="button" class="page-link" (click)="goToPage(this.pagination.nextPage)" aria-label="Next">
+                <span aria-hidden="true">»</span>
+              </button>
+            </li>
+
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,7 @@
+<div
+  *ngIf="img"
+  class="card mb-3">
+  <div class="card-body text-center shadow">
+    <img class="rounded-circle mb-3 mt-4" [src]="img | newImage: 'users'" width="160" height="160">
+  </div>
+</div>

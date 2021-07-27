@@ -1,0 +1,12 @@
+<div *ngIf="this.meService.me" class="container-fluid">
+  <h3 *ngIf="this.meService.me.comunidad" class="text-dark mb-4">Comunidad: {{this.meService.me.comunidad.name}}</h3>
+  <div class="row mb-3">
+
+    <div class="col">
+      <router-outlet></router-outlet>
+
+    </div>
+
+  </div>
+
+</div>

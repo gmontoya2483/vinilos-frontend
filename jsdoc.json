@@ -4,16 +4,16 @@
     "includePattern": ".ts$",
     "excludePattern": "(node_modules/|docs)"
   },
-  "plugins": ["plugins/markdown"],
+  "plugins": [
+    "node_modules/jsdoc/plugins/markdown",
+    "node_modules/angular-jsdoc/common/plugins/ngdoc"
+  ],
   "templates": {
     "cleverLinks": true,
     "monospaceLinks": true
   },
   "opts": {
     "recurse": true,
-    "destination": "./docs/",
-    "template": "./custom-template",
-    "tutorials": "./tutorials",
-    "readme": "./readme/readme.md"
+    "destination": "./docs/"
   }
 }

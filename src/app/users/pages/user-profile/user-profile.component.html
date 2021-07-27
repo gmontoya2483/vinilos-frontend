@@ -1,0 +1,52 @@
+<div class="card-header py-3">
+  <div class="row">
+
+    <div class="col-6 mr-auto">
+      <p class="text-primary m-0 font-weight-bold">
+        Ver Perfil</p>
+    </div>
+
+    <div class="col-6 text-right">
+      <button type="button"
+              class="btn btn-dark"
+              (click)="back()">
+        <i class="fas fa-angle-double-left mr-1"></i>Volver
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="user" class="card-body mt-2">
+
+  <div class="row">
+
+    <div class="col-lg-4">
+
+      <div class="row">
+        <div class="col">
+          <app-user-profile-photo [img]="this.user.img"></app-user-profile-photo>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <app-user-profile-details [user]="user"></app-user-profile-details>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-8">
+      <app-user-profile-copies *ngIf="userId" [userId]="user._id"></app-user-profile-copies>
+      <app-user-profile-copies *ngIf="followingId" [followingId]="user._id"></app-user-profile-copies>
+      <app-user-profile-copies *ngIf="followerId" [followerId]="user._id"></app-user-profile-copies>
+    </div>
+
+
+  </div>
+
+
+
+</div>
+

@@ -1,0 +1,24 @@
+<div *ngIf="this.meService.me" class="container-fluid">
+  <h3 class="text-dark mb-4">Perfil</h3>
+  <div class="row mb-3">
+
+
+    <div class="col-lg-4">
+      <app-photo></app-photo>
+    </div>
+
+
+    <div class="col-lg-8">
+
+      <div class="row">
+        <div class="col">
+
+          <app-user-settings></app-user-settings>
+          <app-community></app-community>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,135 @@
+<div class="container register_container animated--fade-in">
+  <div class="card shadow-lg o-hidden border-0 my-5">
+    <div class="card-body p-0">
+      <div class="row">
+
+        <div class="col">
+          <div class="p-5">
+            <div class="text-center">
+              <h4 class="text-dark mb-4">Crear una cuenta</h4>
+            </div>
+
+            <form [formGroup]="registroForm" (ngSubmit)="guardarUsuario()">
+
+              <div class="form-group row">
+                <!-- ============================================================== -->
+                <!-- Campo Nombre  -->
+                <!-- ============================================================== -->
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input class="form-control"
+                         type="text"
+                         name = "nombre"
+                         placeholder="Nombre"
+                         required
+                         formControlName="nombre"
+                         [class.is-invalid]="campoNoValido('nombre')"
+                  >
+                  <div class="invalid-feedback">
+                    Ingrese un mínimo de 5 caracteres.
+                  </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Fin Campo Nombre  -->
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <!-- Campo Apellido  -->
+                <!-- ============================================================== -->
+                <div class="col-sm-6">
+                  <input class="form-control"
+                         type="text"
+                         placeholder="Apellido"
+                         name="apellido"
+                         formControlName="apellido"
+                         [class.is-invalid]="campoNoValido('apellido')"
+                  >
+                  <div class="invalid-feedback">
+                    Ingrese un mínimo de 5 caracteres.
+                  </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Fin Campo Apellido  -->
+                <!-- ============================================================== -->
+              </div>
+
+              <!-- ============================================================== -->
+              <!-- Campo Email  -->
+              <!-- ============================================================== -->
+              <div class="form-group">
+                <input class="form-control"
+                       type="email"
+                       name ="email"
+                       placeholder="Email"
+                       required
+                       formControlName="email"
+                       [class.is-invalid]="campoNoValido('email')"
+                >
+                <div class="invalid-feedback">
+                  Ingrese un email válido.
+                </div>
+              </div>
+              <!-- ============================================================== -->
+              <!-- Fin Campo Email  -->
+              <!-- ============================================================== -->
+
+
+              <div class="form-group row">
+                <!-- ============================================================== -->
+                <!-- Campo Password1  -->
+                <!-- ============================================================== -->
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input class="form-control"
+                         type="password"
+                         name="password1"
+                         required
+                         placeholder="Contraseña"
+                         formControlName="password1"
+                         [class.is-invalid]="campoNoValido('password1')"
+                  >
+                  <div class="invalid-feedback">
+                    Ingrese un mínimo de 8 caractéres.
+                  </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Fin Campo Password1  -->
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <!-- Campo Password1  -->
+                <!-- ============================================================== -->
+                <div class="col-sm-6">
+                  <input class="form-control"
+                         type="password"
+                         name="password2"
+                         required
+                         placeholder="Repetir la contraseña"
+                         formControlName="password2"
+                         [class.is-invalid]="password2NoValido"
+                  >
+                  <div class="invalid-feedback">
+                    Las contraseñas deben ser iguales.
+                  </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Fin Campo Password2  -->
+                <!-- ============================================================== -->
+              </div>
+
+
+              <button class="btn btn-primary btn-block text-white " type="submit">Registrar Cuenta</button>
+              <hr>
+              <!--              <a class="btn btn-primary btn-block text-white btn-google " role="button"><i class="fab fa-google"></i>&nbsp; Registrar con Google</a>-->
+              <!--              <hr>-->
+
+            </form>
+
+
+            <div class="text-center"><a class="small" [routerLink]="['/auth/cambiarPassword']">¿Olvidó su contraseña?</a></div>
+            <div class="text-center"><a class="small" routerLink="/auth/login">¿Ya tiene una cuenta? Ingresar!</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

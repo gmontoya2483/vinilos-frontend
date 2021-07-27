@@ -1,0 +1,96 @@
+<div class="card shadow mb-3">
+  <div class="card-header py-3">
+    <p class="text-primary m-0 font-weight-bold">Datos del Usuario</p>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="userDataForm" (ngSubmit)="guardarUsuario()">
+
+
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            <label for="email"><strong>Email</strong></label>
+            <input class="form-control"
+                   type="email"
+                   placeholder="user@example.com"
+                   name="email"
+                   id="email"
+                   formControlName="email"
+            >
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            <label for="nombre"><strong>Nombre</strong></label>
+            <input class="form-control"
+                   type="text"
+                   placeholder="Nombre"
+                   name="nombre"
+                   id="nombre"
+                   formControlName="nombre"
+                   [class.is-invalid]="campoNoValido('nombre')"
+            >
+
+            <div class="invalid-feedback">
+              Ingrese un mínimo de 5 caracteres.
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            <label for="nombre"><strong>Apellido</strong></label>
+            <input class="form-control"
+                   type="text"
+                   placeholder="Apellido"
+                   name="apellido"
+                   id="apellido"
+                   formControlName="apellido"
+                   [class.is-invalid]="campoNoValido('apellido')"
+            >
+
+            <div class="invalid-feedback">
+              Ingrese un mínimo de 5 caracteres.
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            <label for="paisResidencia">Pais de Residencia</label>
+            <select class="custom-select"
+                    id="paisResidencia"
+                    name="paisResidencia"
+                    formControlName="paisResidencia"
+            >
+              <option  value="">Seleccionar un pais...</option>
+              <option *ngFor="let country of this.countries"
+                [value]="country._id">{{country.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-sm" type="submit" [disabled]="userDataForm.pristine" >
+          <i class="fa" [ngClass]="{'fa-spin fa-sync': saving, 'fa-save': !saving}"></i>
+          Guardar Datos del Usuario
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

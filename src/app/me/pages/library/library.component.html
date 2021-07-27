@@ -1,0 +1,160 @@
+<div *ngIf="this.meService.me" class="container-fluid">
+  <h3  class="text-dark mb-4">Mi biblioteca</h3>
+  <div class="row mb-3">
+
+    <div class="col">
+
+
+
+
+      <div class="card-header py-3">
+        <div class="row">
+          <div class="col-6 mr-auto"><p class="text-primary m-0 font-weight-bold">Ejemplares</p></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 text-nowrap">
+            <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+              <label>Mostrar&nbsp;
+                <select
+                  [(ngModel)]="pageSize"
+                  class="form-control form-control-sm custom-select custom-select-sm"
+                  (change)="changePageSize()"
+                >
+                  <option *ngFor="let size of this.pageSizes" [value]="size" selected="">{{ size }}</option>
+
+                </select>&nbsp;
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="text-md-right dataTables_filter" id="dataTable_filter">
+              <label>
+                <input [(ngModel)]="search"
+                       type="search"
+                       class="form-control form-control-sm" aria-controls="dataTable"
+                       placeholder="Buscar"
+                       (keyup.enter)="searchVinyls()"
+                >
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Tabla de resultados -->
+        <div class="table-responsive table mt-2"  role="grid" aria-describedby="dataTable_info">
+          <table class="table my-0" id="dataTable">
+
+            <thead>
+            <tr class="d-flex">
+              <th class="col-3">Title</th>
+              <th class="col-4">Description</th>
+              <th class="col-2">Author</th>
+              <th class="col-2">Genre</th>
+              <th class="col-1"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let copy of this.copies; index as i"
+                class="d-flex"
+            >
+              <td class="col-3">
+                 {{ copy.vinyl.title | titlecase }}
+              </td>
+              <td class="col-4">
+                {{ copy.vinyl.description | truncateText:500}}
+              </td>
+              <td class="col-2">
+                {{ copy.vinyl.author.lastName | titlecase }}  {{ copy.vinyl.author.name | titlecase }}
+              </td>
+              <td class="col-2">
+                {{ copy.vinyl.genre.name | titlecase }}
+              </td>
+              <td class="col-1">
+                <div class="row">
+
+                  <div class="col">
+                    <div class="btn btn-outline-success"
+                         data-bs-toggle="tooltip"
+                         data-bs-placement="top"
+                         title="Ver Detalle"
+                         (click)="showCopy(copy._id, copy.vinyl._id)">
+                      <i class="far fa-eye"></i>
+                    </div>
+                  </div>
+<!--                  <div class="col">-->
+<!--                    <div class="btn btn-outline-primary"-->
+<!--                         data-bs-toggle="tooltip"-->
+<!--                         data-bs-placement="top"-->
+<!--                         title="Agregar ejemplar a tu biblioteca"-->
+<!--                         (click)="addCopy(copy.book._id)"-->
+<!--                    >-->
+<!--                      <i class="fas fa-plus"></i>-->
+<!--                    </div>-->
+<!--                  </div>-->
+
+
+                </div>
+
+              </td>
+
+            </tr>
+
+            </tbody>
+
+          </table>
+        </div>
+        <!-- Fin Tabla de resultados -->
+
+
+        <div *ngIf="pagination" class="row">
+          <div class="col-md-6 align-self-center">
+            <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+              Mostrando {{pagination.showing.from}} a {{pagination.showing.to}} de {{pagination.showing.of}}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+              <ul class="pagination">
+
+                <li class="page-item" [ngClass]="{'disabled': !pagination.previousPage }">
+                  <button class="page-link" type="button" (click)="goToPage(this.pagination.previousPage)" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                  </button>
+                </li>
+
+                <li *ngFor="let page of this.pagination.pages" class="page-item" [ngClass]="{'active': this.pagination.currentPage === page}">
+                  <button type="button" class="page-link" (click)="goToPage(page)">
+                    {{page}}
+                  </button>
+                </li>
+
+                <li class="page-item" [ngClass]="{'disabled': !pagination.nextPage }">
+                  <button type="button" class="page-link" (click)="goToPage(this.pagination.nextPage)" aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                  </button>
+                </li>
+
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+

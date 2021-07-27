@@ -1,0 +1,24 @@
+<div  class="card mb-3">
+  <div class="card-body shadow">
+    <div class="row mt-3">
+      <div class="col">
+        <strong>Nombre: </strong> {{ user.apellido | titlecase}}, {{ user.nombre | titlecase}}
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <strong>Pais de residencia: </strong> {{ user.paisResidencia.name| titlecase}}
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <strong>Comunidad: </strong> {{ user.comunidad.name| titlecase}}
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <strong>Fecha Ingreso: </strong> {{ user.createdDateTime | date }}
+      </div>
+    </div>
+  </div>
+</div>

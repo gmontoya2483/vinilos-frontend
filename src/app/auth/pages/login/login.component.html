@@ -1,0 +1,100 @@
+<div class="container login_container">
+  <div class="row justify-content-center">
+    <div class="col-md-9 col-lg-12 col-xl-10">
+      <div class="card shadow-lg o-hidden border-0 my-5">
+        <div class="card-body p-0">
+          <div class="row">
+
+            <div class="col">
+              <div class="p-5">
+                <div class="text-center">
+                  <h4 class="text-dark mb-4">Bienvenido</h4>
+                </div>
+
+
+                <form [formGroup]="loginForm" (ngSubmit)="ingresar()">
+
+                  <!-- ============================================================== -->
+                  <!-- Campo Email  -->
+                  <!-- ============================================================== -->
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      type="email"
+                      placeholder="Ingrese su Email ..."
+                      formControlName="email"
+                      name="email"
+                      [class.is-invalid]="campoNoValido('email')"
+                      required
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    >
+                    <div class="invalid-feedback">
+                      Ingrese un email válido.
+                    </div>
+                  </div>
+                  <!-- ============================================================== -->
+                  <!-- Fin Campo Email  -->
+                  <!-- ============================================================== -->
+
+
+                  <!-- ============================================================== -->
+                  <!-- Campo Password  -->
+                  <!-- ============================================================== -->
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      type="password"
+                      id="exampleInputPassword"
+                      placeholder="Contraseña"
+                      name="password"
+                      formControlName="password"
+                      [class.is-invalid]="campoNoValido('password')"
+                      required
+                    >
+                    <div class="invalid-feedback">
+                      Ingrese su password.
+                    </div>
+                  </div>
+                  <!-- ============================================================== -->
+                  <!-- Fin Campo Password  -->
+                  <!-- ============================================================== -->
+
+                  <!-- ============================================================== -->
+                  <!-- Campo Recuerdame  -->
+                  <!-- ============================================================== -->
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
+                      <div class="form-check">
+                        <input class="form-check-input custom-control-input"
+                               type="checkbox"
+                               id="formCheck-1"
+                               name="recuerdame"
+                               formControlName="recuerdame"
+                        >
+                        <label class="form-check-label custom-control-label" for="formCheck-1">Recordarme</label>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ============================================================== -->
+                  <!-- Fin campo Recuerdame  -->
+                  <!-- ============================================================== -->
+
+                  <button class="btn btn-primary btn-block text-white " type="submit">Ingresar</button>
+                  <hr>
+
+                  <!--                  <a class="btn btn-primary btn-block text-white btn-google" role="button"><i class="fab fa-google"></i>&nbsp; Ingresar con Google</a>-->
+                  <!--                  <a class="btn btn-primary btn-block text-white btn-facebook btn-users" role="button"><i class="fab fa-facebook-f"></i>&nbsp; Login with Facebook</a>-->
+
+                  <hr>
+                </form>
+                <div class="text-center"><a class="small" [routerLink]="['/auth/cambiarPassword']">Olvidó su contraseña?</a></div>
+                <div class="text-center"><a class="small" routerLink="/auth/register">Crear una cuenta!</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,71 @@
+ <div class="card-header py-3">
+    <div class="row">
+
+      <div class="col-6 mr-auto">
+        <p class="text-primary m-0 font-weight-bold">
+          Nuevo Autor</p>
+      </div>
+
+      <div class="col-6 text-right">
+        <button type="button"
+                class="btn btn-dark"
+                (click)="back()">
+          <i class="fas fa-angle-double-left mr-1"></i>Volver
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card-body mt-5">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-10   mr-auto ml-auto card shadow">
+        <form autocomplete="off"
+              [formGroup] = "miFormulario"
+              (ngSubmit)="save()"
+        >
+
+          <div class="row mt-3">
+            <div class="col">
+              <label for="inputName" class="form-label">Nombre</label>
+              <input type="text"
+                     class="form-control"
+                     id="inputName"
+                     placeholder="Nombre"
+                     formControlName="name"
+                     [class.is-invalid]="campoEsValido('name')"
+              >
+              <div class="invalid-feedback">
+                El nombre es obligatorio y debe tener entre 3 y 30 caracteres
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col">
+              <label for="inputLastName" class="form-label">Apellido</label>
+              <input type="text"
+                     class="form-control"
+                     id="inputLastName"
+                     placeholder="Apellido"
+                     formControlName="lastName"
+                     [class.is-invalid]="campoEsValido('lastName')"
+              >
+              <div class="invalid-feedback">
+                El apellido es obligatorio y debe tener entre 3 y 30 caracteres
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3 mb-5">
+            <div class="col">
+              <button class="btn btn-primary float-right">Agregar</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+

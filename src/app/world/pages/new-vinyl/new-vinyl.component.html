@@ -1,0 +1,119 @@
+<div class="card-header py-3">
+  <div class="row">
+
+    <div class="col-6 mr-auto">
+      <p class="text-primary m-0 font-weight-bold">
+        Nuevo Libro</p>
+    </div>
+
+    <div class="col-6 text-right">
+      <button type="button"
+              class="btn btn-dark"
+              (click)="back()">
+        <i class="fas fa-angle-double-left mr-1"></i>Volver
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="card-body mt-2">
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-12   mr-auto ml-auto card shadow">
+      <form autocomplete="off"
+            [formGroup] = "miFormulario"
+            (ngSubmit)="save()"
+      >
+
+        <div class="row mt-3">
+          <div class="col">
+            <label for="inputTitulo" class="form-label">Título</label>
+            <input type="text"
+                   class="form-control"
+                   id="inputTitulo"
+                   placeholder="Título"
+                   formControlName="title"
+                   [class.is-invalid]="campoEsValido('title')"
+            >
+            <div class="invalid-feedback">
+              El título es obligatorio y debe tener entre 3 y 100 caracteres
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col">
+            <label for="inputDescription" class="form-label">Descripción</label>
+            <textarea
+                   class="form-control"
+                   id="inputDescription"
+                   placeholder="Descripción"
+                   formControlName="description"
+                   rows="8"
+                   [class.is-invalid]="campoEsValido('description')"
+            ></textarea>
+            <div class="invalid-feedback">
+              La descripcion es obligatoria y debe tener entre 5 y 1500 caracteres
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3 mb-5">
+          <div class="col">
+            <label class="form-label" for="genreSelect">Género</label>
+            <select
+              id="genreSelect"
+              class="form-control"
+              formControlName="genreId"
+              [class.is-invalid]="campoEsValido('genreId')"
+            >
+              <option value="">-- Seleccione Género --</option>
+              <option *ngFor="let genre of genres"
+                      [value]="genre._id"
+              >
+                {{ genre.name | titlecase }}
+              </option>
+            </select>
+            <div class="invalid-feedback">
+              Se debe especifiar un género
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3 mb-5">
+          <div class="col">
+            <label class="form-label" for="genreSelect">Autor Principal</label>
+            <select
+              id="authorSelect"
+              class="form-control"
+              formControlName="authorId"
+              [class.is-invalid]="campoEsValido('authorId')"
+            >
+              <option value="">-- Seleccione Autor Principal --</option>
+
+              <option *ngFor="let author of authors"
+                      [value]="author._id"
+              >
+                {{ author.lastName | titlecase }}, {{ author.name | titlecase }}
+              </option>
+
+            </select>
+            <div class="invalid-feedback">
+              Se debe especificar el autor principal
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row mt-3 mb-5">
+          <div class="col">
+            <button class="btn btn-primary float-right">Agregar</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+

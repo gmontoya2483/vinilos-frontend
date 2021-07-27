@@ -1,0 +1,73 @@
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+  <div class="container-fluid d-flex flex-column p-0">
+    <div class="navbar-brand d-flex justify-content-start align-items-start sidebar-brand m-0">
+<!--      <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>-->
+
+      <div class="sidebar-brand-text mx-3"><span>Vinilos</span></div>
+      <div class="sidebar-brand-text"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+<!--      <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>-->
+
+    </div>
+    <hr class="sidebar-divider my-0">
+
+    <!--    id="accordionSidebar"-->
+
+    <div *ngIf="this.meService.me">
+      <ul class="nav navbar-nav text-light" >
+        <!-- Items generales que no depende que el usuario este asociado a una comunidad -->
+        <li *ngFor="let item of sideNavBarGeneralItems"
+            class="nav-item"
+            role="presentation"
+        >
+          <a class="nav-link"   [routerLink]="[item.path]" routerLinkActive="active" >
+            <i *ngIf="item.icon" [class]="item.icon"></i><span>{{ item.description}}</span>
+          </a>
+          <div *ngIf="item.children.length > 0" class="container-fluid">
+
+            <ul class="nav navbar-nav text-light">
+              <li *ngFor="let child of item.children" class="nav-item" role="presentation">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="[child.path]">
+                  <i *ngIf="child.icon" [class]="child.icon"></i><span>{{ child.description}}</span>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+          <hr class="sidebar-divider my-0">
+        </li>
+        <!-- Fin Items Generales-->
+      </ul>
+
+
+    </div>
+
+    <div *ngIf="this.meService.me">
+      <ul *ngIf="this.meService.me.comunidad" class="nav navbar-nav text-light" >
+        <li *ngFor="let item of sideNavBarCommunityItems"
+            class="nav-item"
+            role="presentation"
+        >
+          <a class="nav-link"   [routerLink]="[item.path]" routerLinkActive="active" >
+            <i *ngIf="item.icon" [class]="item.icon"></i><span>{{ item.description}}</span>
+          </a>
+          <div *ngIf="item.children.length > 0" class="container-fluid">
+
+            <ul class="nav navbar-nav text-light">
+              <li *ngFor="let child of item.children" class="nav-item" role="presentation">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="[child.path]">
+                  <i *ngIf="child.icon" [class]="child.icon"></i><span>{{ child.description}}</span>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+          <hr class="sidebar-divider my-0">
+        </li>
+
+      </ul>
+    </div>
+
+    <!--    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
+  </div>
+</nav>
+
